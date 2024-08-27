@@ -1,1 +1,80 @@
-Hello worlld!
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Countdown</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        input,
+        button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #countdown {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Countdown to Event</h1>
+    <input type="datetime-local" id="eventDate">
+    <button onclick="startCountdown()">Start Countdown</button>
+    <div id="countdown"></div>
+    <script>
+        let countdownInterval;
+        function startCountdown() {
+            clearInterval(countdownInterval);
+            const eventDateInput = document.getElementById("eventDate");
+            const countDownDate = new Date(eventDateInput.value).getTime();
+            countdownInterval = setInterval(function () {
+                const now = new Date().getTime();
+                const distance = countDownDate - now;
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)); Math.floor((distance % (1000 * 60)) / 1000);
+                document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
+                    + minutes + "m " + seconds + "s ";
+                if (distance < 0) {
+                    clearInterval(countdownInterval);
+                    document.getElementById("countdown").innerHTML = "EVENT HAS STARTED";
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+
+</html>
